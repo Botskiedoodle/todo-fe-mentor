@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center transition ease-in-out duration-500"
+  <div class="flex justify-center transition ease-in-out duration-500 min-h-screen flex-grow"
     :class="isDarkMode ? 'bg-gray-900' : 'bg-slate-300'">
 
     <template v-if="isDarkMode">
@@ -10,8 +10,6 @@
       <img class="absolute w-screen lg:hidden" src="./assets/bg-mobile-light.jpg" alt="" />
       <img class="absolute w-screen lg:block hidden" src="./assets/bg-desktop-light.jpg" alt="" />
     </template>
-
-
 
     <div class="flex flex-col w-[40em] z-10 px-8">
       <div class="flex justify-between py-8 ">
@@ -39,8 +37,8 @@
             <draggable v-model="tasks" tag="div" :itemKey="task => task.id" v-bind="dragOptions" @start="drag = true"
               @end="drag = false">
               <template #item="{ element: task }">
-                <transition name="fade" mode="out-in">
-                  <div class="p-6 flex items-center  cursor-pointer task justify-between" v-if="filterItem(task)">
+                <transition-group tag="div" name="fade" appear mode="out-in" class=" task">
+                  <div class="p-6 flex items-center  cursor-pointer justify-between" v-if="filterItem(task)">
                     <div class="flex gap-4 " @click="toggleComplete(task.id)">
                       <div class="w-6 h-6 border-solid border-2 box-circle rounded-full flex items-center justify-center "
                         :class="{ 'check-bg': task.completed }">
@@ -55,7 +53,7 @@
                       <img src="./assets/icon-cross.svg" alt="">
                     </div>
                   </div>
-                </transition>
+                </transition-group>
               </template>
             </draggable>
             <div v-if="filterCriteria === 'completed' && checkForCompleted" class="p-6 task secondary-font-color">
@@ -203,14 +201,11 @@ const filterCriteria = ref('all')
 
 </script>
 
-<style>
+<style scoped>
 .completed {
   text-decoration: line-through;
 }
 
-.task:not(:last-child) {
-  cursor: pointer
-}
 
 .border-top {
   border-top: 1px solid #5D5F7E;
@@ -223,6 +218,10 @@ const filterCriteria = ref('all')
 
 .box-circle {
   border-color: #36384D;
+}
+
+.task:not(:last-child) {
+  cursor: pointer
 }
 
 .task:not(:first-child) {
@@ -243,13 +242,17 @@ const filterCriteria = ref('all')
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s, transform 0.5s;
+
+  transition: opacity .5s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-  transform: translateY(10px);
+}
+
+.fade-move {
+  transition: all .5s ease;
 }
 
 .bg-mobile-dark {
@@ -259,9 +262,4 @@ const filterCriteria = ref('all')
 .bg-desktop-dark {
   background-image: url('./assets/bg-desktop-dark.jpg');
 }
-
-/* .ghost {
-  opacity: 0.5;
-  background: #c8ebfb;
-} */
 </style>
