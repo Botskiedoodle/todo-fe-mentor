@@ -24,12 +24,12 @@
 
       <div>
         <div id="input-box" class="transition ease-in-out duration-500 p-6 rounded-lg flex items-center gap-4 shadow-lg"
-          :class="isDarkMode ? 'box-color' : 'bg-slate-200'">
+          :class="isDarkMode ? 'box-color ' : 'bg-slate-200'">
           <div class="w-6 h-6 border-solid border-2 box-circle rounded-full  flex  items-center justify-center">
           </div>
           <input type="text" v-model="inputNewTask" placeholder="Create a new todo..." @keyup.enter="addTask"
             class="text-white outline-none transition ease-in-out duration-500"
-            :class="isDarkMode ? 'box-color' : 'bg-slate-200 text-slate-500'">
+            :class="isDarkMode ? 'box-color' : 'bg-slate-200 text-black'">
         </div>
         <div class="mt-4 rounded-lg shadow-lg transition ease-in-out duration-500"
           :class="isDarkMode ? 'box-color text-white' : 'bg-slate-200'">
