@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center h-100 transition ease-in-out duration-500"
+  <div class="flex justify-center h-100 transition ease-in-out duration-500 lg:h-screen"
     :class="isDarkMode ? 'bg-gray-900' : 'bg-slate-300'">
 
     <template v-if="isDarkMode">
